@@ -11,7 +11,10 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import model.NoiDung;
+import model.QuocGia;
 import model.User;
+import model.VanDongVien;
 import view.LoginFrm;
 
 
@@ -50,5 +53,22 @@ public class RMIClientControl implements RMIInterface{
         
 //        LoginFrm view = new LoginFrm();
 //        view.setVisible(true);
+    }
+
+    @Override
+    public QuocGia[] getListQuocGia() throws RemoteException {
+        return rmiServer.getListQuocGia();
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean themVDV(VanDongVien v) throws RemoteException {
+        return rmiServer.themVDV(v);
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public NoiDung[] getNoiDungList() throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

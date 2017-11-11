@@ -5,11 +5,13 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author HIEU
  */
-public class San {
+public class San implements Serializable {
     
     private int id;
     private String ten;
@@ -20,6 +22,32 @@ public class San {
         this.ten = ten;
         this.mota = mota;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTen() {
+        return ten;
+    }
+
+    public void setTen(String ten) {
+        this.ten = ten;
+    }
+
+    public String getMota() {
+        return mota;
+    }
+
+    public void setMota(String mota) {
+        this.mota = mota;
+    }
+    
+    
     
     
 }

@@ -5,17 +5,44 @@
  */
 package view;
 
+import control.RMIClientControl;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.QuocGia;
+import model.VanDongVien;
+
 /**
  *
  * @author ASUS
  */
 public class AddVDVFrm extends javax.swing.JFrame {
-
+    private QuocGia[] listQuocGia;
+    public RMIClientControl rcc;
     /**
      * Creates new form AddVDVFrm
      */
+    public void setResult() {
+        if(listQuocGia != null) {
+            for(QuocGia n : listQuocGia) {
+                cbQuocGia.addItem(n.getTen());
+            }
+        }
+    }
     public AddVDVFrm() {
         initComponents();
+        try{
+           rcc = new RMIClientControl();
+           listQuocGia = rcc.getListQuocGia();
+           setResult();
+        
+        }
+        catch(Exception e){
+           e.printStackTrace();
+        }
     }
 
     /**
@@ -68,7 +95,18 @@ public class AddVDVFrm extends javax.swing.JFrame {
 
         jLabel8.setText("Quốc gia");
 
+        cbQuocGia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbQuocGiaActionPerformed(evt);
+            }
+        });
+
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnHuy.setText("Hủy");
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
@@ -165,6 +203,40 @@ public class AddVDVFrm extends javax.swing.JFrame {
         cbQuocGia.setSelectedIndex(0);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnHuyActionPerformed
+
+    private void cbQuocGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbQuocGiaActionPerformed
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbQuocGiaActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        VanDongVien v = new VanDongVien();
+        v.setHoten(txtTenVDV.getText());
+        v.setGioiTinh((String)cbGioitinh.getSelectedItem());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            java.sql.Date ngaySinh = new java.sql.Date(sdf.parse(txtNgaysinh.getText()).getTime());
+            v.setNgaySinh(ngaySinh);
+            
+            
+            // TODO add your handling code here:
+        } catch (ParseException ex) {
+            Logger.getLogger(AddVDVFrm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        v.setDiem(Integer.parseInt(txtDiemVDV.getText()));
+        v.setAnh(txtAnhVDV.getText());
+        v.setMota(txtMotaVDV.getText());
+        v.setQuocGia(listQuocGia[cbQuocGia.getSelectedIndex()]);
+        try {
+            if(rcc.themVDV(v)) JOptionPane.showMessageDialog(null, "Thêm thành công!");
+            else JOptionPane.showMessageDialog(null, "Lỗi");
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_btnThemActionPerformed
 
     /**
      * @param args the command line arguments
