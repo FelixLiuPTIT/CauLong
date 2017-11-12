@@ -13,6 +13,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import model.NoiDung;
 import model.QuocGia;
+import model.San;
 import model.User;
 import model.VanDongVien;
 import view.LoginFrm;
@@ -70,5 +71,11 @@ public class RMIClientControl implements RMIInterface{
     @Override
     public NoiDung[] getNoiDungList() throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean themSan(San s) throws RemoteException {
+        return rmiServer.themSan(s);
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

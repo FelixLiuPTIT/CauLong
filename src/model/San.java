@@ -46,6 +46,14 @@ public class San implements Serializable {
     public void setMota(String mota) {
         this.mota = mota;
     }
+
+    public San(String ten, String mota) {
+        this.ten = ten;
+        this.mota = mota;
+    }
+
+    public San() {
+    }
     
     
     
