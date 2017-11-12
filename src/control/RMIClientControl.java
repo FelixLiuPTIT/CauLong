@@ -11,6 +11,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import model.Doi;
 import model.NoiDung;
 import model.QuocGia;
 import model.San;
@@ -76,6 +77,12 @@ public class RMIClientControl implements RMIInterface{
     @Override
     public boolean themSan(San s) throws RemoteException {
         return rmiServer.themSan(s);
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean themDoi(Doi d) throws RemoteException {
+        return rmiServer.themDoi(d);
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
