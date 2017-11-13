@@ -8,18 +8,79 @@ package view;
 import control.RMIClientControl;
 import javax.swing.JOptionPane;
 import model.Doi;
+import model.NoiDung;
+import model.QuocGia;
+import model.VanDongVien;
 
 /**
  *
  * @author ASUS
  */
 public class AddDoiFrm extends javax.swing.JFrame {
+    public QuocGia[] listQuocGia1;
+    public QuocGia[] listQuocGia2;
+    public VanDongVien[] listvdv1;
+    public VanDongVien[] listvdv2;
+    public RMIClientControl rcc;
+    public NoiDung[] listND;
+    public void setResultQuocGia1() {
+        if (listQuocGia1 != null) {
+            for (QuocGia n : listQuocGia1) {
+                cbquocgia1.addItem(n.getTen());
+            }
+        }
+    }
+    public void setResultQuocGia2() {
+        if (listQuocGia2 != null) {
+            for (QuocGia n : listQuocGia2) {
+                cbquocgia2.addItem(n.getTen());
+            }
+        }
+        
+    }
+    public void setResultVDV1(){
+        if(listvdv1!=null){
+            for (VanDongVien v: listvdv1){
+                cbvdv1.addItem(v.getHoten());
+            }
+        }
+    }
+    public void setResultVDV2(){
+        if(listvdv2!=null){
+            for (VanDongVien v: listvdv2){
+                cbvdv2.addItem(v.getHoten());
+            }
+        }
+    }
+    public void setResultNoiDung(){
+        if(listND != null){
+            for(NoiDung n: listND){
+                if(n.getId() > 2)
+                    cbnoidung.addItem(n.getTen());
+            }
+        }
+    }
 
     /**
      * Creates new form AddDoiFrm
      */
     public AddDoiFrm() {
         initComponents();
+        try {
+            rcc = new RMIClientControl();
+            listQuocGia1 = rcc.getListQuocGia();
+            listQuocGia2 = rcc.getListQuocGia();
+            setResultQuocGia1();
+            setResultQuocGia2();
+            listND = rcc.getNoiDungList();
+            setResultNoiDung();
+            
+            
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -38,6 +99,16 @@ public class AddDoiFrm extends javax.swing.JFrame {
         txtMota = new javax.swing.JTextField();
         btnThem = new javax.swing.JButton();
         btnHuy = new javax.swing.JButton();
+        cbvdv1 = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        cbvdv2 = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        cbquocgia1 = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        cbquocgia2 = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        cbnoidung = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +134,39 @@ public class AddDoiFrm extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Vận động viên 1");
+
+        jLabel5.setText("Vận động viên 2");
+
+        jLabel6.setText("Quốc gia");
+
+        cbquocgia1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbquocgia1ItemStateChanged(evt);
+            }
+        });
+
+        jLabel7.setText("Quốc gia");
+
+        cbquocgia2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbquocgia2ItemStateChanged(evt);
+            }
+        });
+        cbquocgia2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbquocgia2ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Nội dung thi đấu");
+
+        cbnoidung.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbnoidungItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -70,24 +174,47 @@ public class AddDoiFrm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(206, 206, 206)
+                        .addGap(169, 169, 169)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnThem)
-                                .addGap(117, 117, 117)
-                                .addComponent(btnHuy))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4))
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(cbquocgia1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(71, 71, 71)
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbquocgia2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addGap(41, 41, 41)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(56, 56, 56)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtTendoi)
-                                    .addComponent(txtMota, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))))))
-                .addContainerGap(185, Short.MAX_VALUE))
+                                    .addComponent(txtTendoi, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                                    .addComponent(txtMota)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cbvdv1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbvdv2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(34, 34, 34)
+                                .addComponent(cbnoidung, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnThem)
+                                .addGap(140, 140, 140)
+                                .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,11 +229,28 @@ public class AddDoiFrm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtMota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68)
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbvdv1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(cbvdv2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbquocgia1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)
+                        .addComponent(cbquocgia2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(cbnoidung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem)
                     .addComponent(btnHuy))
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         pack();
@@ -122,14 +266,102 @@ public class AddDoiFrm extends javax.swing.JFrame {
         Doi d = new Doi();
         d.setTenDoi(txtTendoi.getText());
         d.setMota(txtMota.getText());
+        d.setNoidung(listND[cbnoidung.getSelectedIndex()+2]);
+        VanDongVien v1 = new VanDongVien();
+        VanDongVien v2 = new VanDongVien();
+        v1 = listvdv1[cbvdv1.getSelectedIndex()];
+        v2 = listvdv2[cbvdv2.getSelectedIndex()];
+        if(v1.getId() == v2.getId()){
+            JOptionPane.showMessageDialog(null, "Vận động viên bị trùng, nhập lại");
+            return ;
+        }
         try {
             RMIClientControl rcc = new RMIClientControl();
-            if(rcc.themDoi(d)) JOptionPane.showMessageDialog(null, "Thêm thành công!");
+            
+            if(rcc.themDoi(d)) {
+                int maxid = rcc.maxIdDoi();
+                if( rcc.addVanDongVienDoi(v1, maxid) && rcc.addVanDongVienDoi(v2, maxid))
+                    JOptionPane.showMessageDialog(null, "Thêm thành công");
+                else JOptionPane.showMessageDialog(null, "Lỗi!");
+            }
+                
             else JOptionPane.showMessageDialog(null, "Lỗi!");
         } catch (Exception e) {
+            e.printStackTrace();
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void cbquocgia1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbquocgia1ItemStateChanged
+        // TODO add your handling code here:
+        try {
+            rcc = new RMIClientControl();
+            //while(true){
+                cbvdv1.removeAllItems();
+                listvdv1 = rcc.searchVDVbyQuocGia(cbquocgia1.getSelectedIndex()+1,-1);
+                
+                setResultVDV1();
+                
+           // }
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_cbquocgia1ItemStateChanged
+
+    private void cbquocgia2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbquocgia2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbquocgia2ActionPerformed
+
+    private void cbquocgia2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbquocgia2ItemStateChanged
+       try {
+            rcc = new RMIClientControl();
+            //while(true){
+                cbvdv2.removeAllItems();
+                listvdv2 = rcc.searchVDVbyQuocGia(cbquocgia2.getSelectedIndex()+1,-1);
+                
+                setResultVDV2();
+                
+           // }
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbquocgia2ItemStateChanged
+
+    private void cbnoidungItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbnoidungItemStateChanged
+        
+        try {
+            if (cbnoidung.getSelectedIndex() == 0) {
+                cbvdv1.removeAllItems();
+                cbvdv2.removeAllItems();
+                listvdv1 = rcc.searchVDVbyQuocGia(cbquocgia1.getSelectedIndex() + 1, 0);
+                listvdv2 = rcc.searchVDVbyQuocGia(cbquocgia2.getSelectedIndex()+1, 0);
+                setResultVDV1(); setResultVDV2();
+            }
+            else if (cbnoidung.getSelectedIndex() == 1) {
+                cbvdv1.removeAllItems();
+                cbvdv2.removeAllItems();
+                listvdv1 = rcc.searchVDVbyQuocGia(cbquocgia1.getSelectedIndex() + 1, 1);
+                listvdv2 = rcc.searchVDVbyQuocGia(cbquocgia2.getSelectedIndex()+1, 1);
+                setResultVDV1(); setResultVDV2();
+            }
+            else {
+                cbvdv1.removeAllItems();
+                cbvdv2.removeAllItems();
+                listvdv1 = rcc.searchVDVbyQuocGia(cbquocgia1.getSelectedIndex() + 1, -1);
+                listvdv2 = rcc.searchVDVbyQuocGia(cbquocgia2.getSelectedIndex()+1, -1);
+                setResultVDV1(); setResultVDV2();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbnoidungItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -169,9 +401,19 @@ public class AddDoiFrm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHuy;
     private javax.swing.JButton btnThem;
+    private javax.swing.JComboBox<String> cbnoidung;
+    private javax.swing.JComboBox<String> cbquocgia1;
+    private javax.swing.JComboBox<String> cbquocgia2;
+    private javax.swing.JComboBox<String> cbvdv1;
+    private javax.swing.JComboBox<String> cbvdv2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField txtMota;
     private javax.swing.JTextField txtTendoi;
     // End of variables declaration//GEN-END:variables

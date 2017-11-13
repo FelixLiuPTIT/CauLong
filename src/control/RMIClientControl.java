@@ -71,7 +71,8 @@ public class RMIClientControl implements RMIInterface{
 
     @Override
     public NoiDung[] getNoiDungList() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return rmiServer.getNoiDungList();
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -84,5 +85,23 @@ public class RMIClientControl implements RMIInterface{
     public boolean themDoi(Doi d) throws RemoteException {
         return rmiServer.themDoi(d);
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public VanDongVien[] searchVDVbyQuocGia(int idquocgia, int gioitinh) throws RemoteException{
+        return rmiServer.searchVDVbyQuocGia(idquocgia,gioitinh);
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean addVanDongVienDoi(VanDongVien v, int maxid) throws RemoteException {
+        return rmiServer.addVanDongVienDoi(v, maxid);
+      //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int maxIdDoi() throws RemoteException {
+        return rmiServer.maxIdDoi();
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

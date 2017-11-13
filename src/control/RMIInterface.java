@@ -26,4 +26,7 @@ public interface RMIInterface extends Remote{
     public boolean themVDV(VanDongVien v) throws RemoteException;
     public boolean themSan(San s) throws RemoteException;
     public boolean themDoi(Doi d) throws RemoteException;
+    public VanDongVien[] searchVDVbyQuocGia(int idquocgia, int gioitinh) throws RemoteException;
+    public boolean addVanDongVienDoi(VanDongVien v, int maxid) throws RemoteException;
+    public int maxIdDoi() throws RemoteException;
 }
