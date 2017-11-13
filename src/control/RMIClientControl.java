@@ -15,6 +15,7 @@ import model.Doi;
 import model.NoiDung;
 import model.QuocGia;
 import model.San;
+import model.TranDau;
 import model.User;
 import model.VanDongVien;
 import view.LoginFrm;
@@ -58,22 +59,62 @@ public class RMIClientControl implements RMIInterface{
     }
 
     @Override
-    public QuocGia[] getListQuocGia() throws RemoteException {
-        return rmiServer.getListQuocGia();
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public NoiDung[] getNoiDungList() {
+        try {
+            return rmiServer.getNoiDungList();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    @Override
+    public San[] getSanList() {
+        try {
+            return rmiServer.getSanList();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
+    @Override
+    public QuocGia[] getListQuocGia(){
+        try {
+            return rmiServer.getListQuocGia();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public TranDau[] getTranDauList() {
+        try {
+            return rmiServer.getTranDauList();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean themTranDau(TranDau td){
+        try {
+            return rmiServer.themTranDau(td);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
     @Override
     public boolean themVDV(VanDongVien v) throws RemoteException {
         return rmiServer.themVDV(v);
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public NoiDung[] getNoiDungList() throws RemoteException {
-        return rmiServer.getNoiDungList();
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
     @Override
     public boolean themSan(San s) throws RemoteException {
@@ -88,9 +129,13 @@ public class RMIClientControl implements RMIInterface{
     }
 
     @Override
-    public VanDongVien[] searchVDVbyQuocGia(int idquocgia, int gioitinh) throws RemoteException{
-        return rmiServer.searchVDVbyQuocGia(idquocgia,gioitinh);
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public VanDongVien[] searchVDVbyQuocGia(int idquocgia, int gioitinh){
+        try {
+            return rmiServer.searchVDVbyQuocGia(idquocgia, gioitinh);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -103,5 +148,44 @@ public class RMIClientControl implements RMIInterface{
     public int maxIdDoi() throws RemoteException {
         return rmiServer.maxIdDoi();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public boolean dangKyThiDauCaNhan(TranDau td) {
+        try {
+             return rmiServer.dangKyThiDauCaNhan(td);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+     }
+
+    @Override
+    public boolean checkDangKyVanDongVien(TranDau td) {
+        try {
+             return rmiServer.checkDangKyVanDongVien(td);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public Doi[] getDoiByNoiDung(NoiDung nd) {
+        try {
+            return rmiServer.getDoiByNoiDung(nd);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean dangKyThiDauDoi(TranDau td) {
+        try {
+             return rmiServer.dangKyThiDauDoi(td);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
