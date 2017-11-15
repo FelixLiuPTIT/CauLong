@@ -39,7 +39,7 @@ public class LoginFrm extends javax.swing.JFrame {
         btnSignUp = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Username");
 
@@ -123,7 +123,9 @@ public class LoginFrm extends javax.swing.JFrame {
         try {
             RMIClientControl rcc= new RMIClientControl();
             if(rcc.checkLogin(user)){
-                JOptionPane.showMessageDialog(null, "Login Success!");
+                HomeFrm home = new HomeFrm();
+                home.setVisible(true);
+                dispose();
             }
             else JOptionPane.showMessageDialog(null, "Loi!");
         } catch (Exception e) {

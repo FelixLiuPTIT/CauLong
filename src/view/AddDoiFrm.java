@@ -280,8 +280,11 @@ public class AddDoiFrm extends javax.swing.JFrame {
             
             if(rcc.themDoi(d)) {
                 int maxid = rcc.maxIdDoi();
-                if( rcc.addVanDongVienDoi(v1, maxid) && rcc.addVanDongVienDoi(v2, maxid))
+                if( rcc.addVanDongVienDoi(v1, maxid) && rcc.addVanDongVienDoi(v2, maxid)){
                     JOptionPane.showMessageDialog(null, "Thêm thành công");
+                    dispose();
+                }
+                    
                 else JOptionPane.showMessageDialog(null, "Lỗi!");
             }
                 

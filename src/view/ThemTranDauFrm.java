@@ -191,7 +191,7 @@ public class ThemTranDauFrm extends javax.swing.JFrame implements MouseListener 
         btnRefresh = new javax.swing.JButton();
         txtNgay = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Thêm trận đấu");
@@ -417,6 +417,7 @@ public class ThemTranDauFrm extends javax.swing.JFrame implements MouseListener 
             
             if(clientCtr.themTranDau(td)) {
                 JOptionPane.showMessageDialog(null, "Them thanh cong");
+                dispose();
             }
             else {
                 JOptionPane.showMessageDialog(null, "Them khong thanh cong");

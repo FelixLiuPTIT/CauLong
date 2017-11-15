@@ -41,7 +41,7 @@ public class AddSanFrm extends javax.swing.JFrame {
         btnThem = new javax.swing.JButton();
         btnHuy = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
         jLabel1.setText("THÊM SÂN ĐẤU");
@@ -122,7 +122,11 @@ public class AddSanFrm extends javax.swing.JFrame {
         s.setMota(txtMotasan.getText());
         try {
             rcc = new RMIClientControl();
-            if(rcc.themSan(s)) JOptionPane.showMessageDialog(null, "Thêm thành công!");
+            if(rcc.themSan(s)){
+                 JOptionPane.showMessageDialog(null, "Thêm thành công!");
+                 dispose();
+            }
+                   
             else JOptionPane.showMessageDialog(null, "Lỗi!");
         } catch (Exception e) {
             e.printStackTrace();

@@ -72,7 +72,7 @@ public class AddVDVFrm extends javax.swing.JFrame {
         btnThem = new javax.swing.JButton();
         btnHuy = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -229,7 +229,10 @@ public class AddVDVFrm extends javax.swing.JFrame {
         v.setMota(txtMotaVDV.getText());
         v.setQuocGia(listQuocGia[cbQuocGia.getSelectedIndex()]);
         try {
-            if(rcc.themVDV(v)) JOptionPane.showMessageDialog(null, "Thêm thành công!");
+            if(rcc.themVDV(v)){
+                 JOptionPane.showMessageDialog(null, "Thêm thành công!");
+                 dispose();
+            }
             else JOptionPane.showMessageDialog(null, "Lỗi");
             
         } catch (Exception e) {
