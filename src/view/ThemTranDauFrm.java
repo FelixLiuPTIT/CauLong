@@ -417,7 +417,7 @@ public class ThemTranDauFrm extends javax.swing.JFrame implements MouseListener 
             
             if(clientCtr.themTranDau(td)) {
                 JOptionPane.showMessageDialog(null, "Them thanh cong");
-                dispose();
+                //dispose();
             }
             else {
                 JOptionPane.showMessageDialog(null, "Them khong thanh cong");
